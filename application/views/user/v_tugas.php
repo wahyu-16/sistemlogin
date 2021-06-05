@@ -7,50 +7,52 @@
         <form action="modal" method="post">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#jadwalModal"><i class="fa fa-plus"></i>Tambah Data</button>
         </form>
-        <table class="table">
-            <tr>
-                <th>NO</th>
-                <th>MATA KULIAH</th>
-                <th>DOSEN</th>
-                <th>JENIS TUGAS</th>
-                <th>NAMA TUGAS</th>
-                <th>DEADLINE</th>
-                <th>NAMA FILE</th>
-                <th>PENGUMPULAN</th>
-                <th>KETERANGAN</th>
-                <th colspan="2">AKSI</th>
-            </tr>
-            <?php
-            $no = 1;
-            foreach ($tb_tugas as $jdw) :
-            ?>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
                 <tr>
-                    <td><?php echo $no++ ?></td>
-                    <td><?php echo $jdw->mata_kuliah ?></td>
-                    <td><?php echo $jdw->dosen ?></td>
-                    <td><?php echo $jdw->jenis_tugas ?></td>
-                    <td><?php echo $jdw->nama_tugas ?></td>
-                    <td><?php echo $jdw->deadline ?></td>
-                    <td><?php echo $jdw->nama_file ?></td>
-                    <td><?php echo $jdw->pengumpulan ?></td>
-                    <td><?php echo $jdw->keterangan ?></td>
-                    <td onClick="return confirm('Hapus data <?php echo $jdw->mata_kuliah;
-                                                            echo " - ";
-                                                            echo $jdw->nama_tugas;  ?>?')">
-                        <?php echo anchor('user/hapus/' . $jdw->id, '<button type="button"
-                        class="badge badge-danger"><i class="fa fa-trash"></i> Delete</button>'); ?>
-                    </td>
-                    <td onClick="return confirm('ubah data <?php echo $jdw->mata_kuliah;
-                                                            echo " - ";
-                                                            echo $jdw->nama_tugas;  ?>?')">
-                        <?php echo anchor('user/editjadwal/' . $jdw->id, '<button type="button"
-                        class="badge badge-primary"><i class="fa fa-edit"></i> Edit</button>'); ?>
-                    </td>
-
-
+                    <th>NO</th>
+                    <th>MATA KULIAH</th>
+                    <th>DOSEN</th>
+                    <th>JENIS TUGAS</th>
+                    <th>NAMA TUGAS</th>
+                    <th>DEADLINE</th>
+                    <th>NAMA FILE</th>
+                    <th>PENGUMPULAN</th>
+                    <th>KETERANGAN</th>
+                    <th colspan="2">AKSI</th>
                 </tr>
-            <?php endforeach; ?>
-        </table>
+                <?php
+                $no = 1;
+                foreach ($tb_tugas as $jdw) :
+                ?>
+                    <tr>
+                        <td><?php echo $no++ ?></td>
+                        <td><?php echo $jdw->mata_kuliah ?></td>
+                        <td><?php echo $jdw->dosen ?></td>
+                        <td><?php echo $jdw->jenis_tugas ?></td>
+                        <td><?php echo $jdw->nama_tugas ?></td>
+                        <td><?php echo $jdw->deadline ?></td>
+                        <td><?php echo $jdw->nama_file ?></td>
+                        <td><?php echo $jdw->pengumpulan ?></td>
+                        <td><?php echo $jdw->keterangan ?></td>
+                        <td onClick="return confirm('Hapus data <?php echo $jdw->mata_kuliah;
+                                                                echo " - ";
+                                                                echo $jdw->nama_tugas;  ?>?')">
+                            <?php echo anchor('user/hapus/' . $jdw->id, '<button type="button"
+                        class="badge badge-danger"><i class="fa fa-trash"></i> Delete</button>'); ?>
+                        </td>
+                        <td onClick="return confirm('ubah data <?php echo $jdw->mata_kuliah;
+                                                                echo " - ";
+                                                                echo $jdw->nama_tugas;  ?>?')">
+                            <?php echo anchor('user/editjadwal/' . $jdw->id, '<button type="button"
+                        class="badge badge-primary"><i class="fa fa-edit"></i> Edit</button>'); ?>
+                        </td>
+
+
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
     </section>
 </div>
 <!-- /.container-fluid -->
