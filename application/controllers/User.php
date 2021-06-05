@@ -106,4 +106,107 @@ class User extends CI_Controller
             }
         }
     }
+
+
+    public function jadwal()
+    {
+        $this->load->model('menu_model', 'user');
+        $data['title'] = 'Jadwal Tugas';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+        $data['tb_tugas'] = $this->user->tampil_data()->result();
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/v_tugas', $data);
+        $this->load->view('templates/footer');
+    }
+    public function tambah()
+    {
+        $this->load->model('menu_model', 'user');
+        $data['title'] = 'Jadwal Tugas';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+        $data['tb_tugas'] = $this->user->tampil_data()->result();
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/v_tugas', $data);
+        $this->load->view('templates/footer');
+    }
+    public function tambah_aksi()
+    {
+        $this->load->model('menu_model', 'user');
+        $mata_kuliah = $this->input->post('mata_kuliah');
+        $dosen       = $this->input->post('dosen');
+        $jenis_tugas = $this->input->post('jenis_tugas');
+        $nama_tugas  = $this->input->post('nama_tugas');
+        $deadline    = $this->input->post('deadline');
+        $nama_file   = $this->input->post('nama_file');
+        $pengumpulan = $this->input->post('pengumpulan');
+        $keterangan  = $this->input->post('keterangan');
+
+        $data = array(
+            'mata_kuliah'    => $mata_kuliah,
+            'dosen'          => $dosen,
+            'jenis_tugas'    => $jenis_tugas,
+            'nama_tugas'     => $nama_tugas,
+            'deadline'       => $deadline,
+            'nama_file'      => $nama_file,
+            'pengumpulan'    => $pengumpulan,
+            'keterangan'     => $keterangan
+        );
+        $this->user->input_data($data, 'tb_tugas');
+        redirect('user/jadwal');
+    }
+    public function hapus($id)
+    {
+        $this->load->model('menu_model', 'user');
+        $where = array('id' => $id);
+        $this->user->hapus_data($where, 'tb_tugas');
+        redirect('user/jadwal');
+    }
+    public function editjadwal($id)
+    {
+        $this->load->model('menu_model', 'user');
+        $data['title'] = 'Edit Jadwal Tugas';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+        $where = array('id' => $id);
+        $data['tb_tugas'] = $this->user->edit_data($where, 'tb_tugas')->result();
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/v_edit', $data);
+        $this->load->view('templates/footer');
+    }
+    public function update()
+    {
+        $this->load->model('menu_model', 'user');
+        $id = $this->input->post('id');
+        $mata_kuliah = $this->input->post('mata_kuliah');
+        $dosen       = $this->input->post('dosen');
+        $jenis_tugas = $this->input->post('jenis_tugas');
+        $nama_tugas  = $this->input->post('nama_tugas');
+        $deadline    = $this->input->post('deadline');
+        $nama_file   = $this->input->post('nama_file');
+        $pengumpulan = $this->input->post('pengumpulan');
+        $keterangan  = $this->input->post('keterangan');
+
+        $data = array(
+            'mata_kuliah'    => $mata_kuliah,
+            'dosen'          => $dosen,
+            'jenis_tugas'    => $jenis_tugas,
+            'nama_tugas'     => $nama_tugas,
+            'deadline'       => $deadline,
+            'nama_file'      => $nama_file,
+            'pengumpulan'    => $pengumpulan,
+            'keterangan'     => $keterangan
+        );
+        $where = array(
+            'id' => $id
+        );
+        $this->user->update_data($where, $data, 'tb_tugas');
+        redirect('user/jadwal');
+    }
 }

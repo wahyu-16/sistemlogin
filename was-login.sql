@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jun 2021 pada 10.24
+-- Waktu pembuatan: 05 Jun 2021 pada 07.12
 -- Versi server: 10.4.19-MariaDB
 -- Versi PHP: 7.3.28
 
@@ -20,6 +20,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `was-login`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_tugas`
+--
+
+CREATE TABLE `tb_tugas` (
+  `id` int(10) NOT NULL,
+  `mata_kuliah` varchar(30) NOT NULL,
+  `dosen` varchar(50) NOT NULL,
+  `jenis_tugas` varchar(25) NOT NULL,
+  `nama_tugas` varchar(50) NOT NULL,
+  `deadline` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `nama_file` varchar(50) NOT NULL,
+  `pengumpulan` varchar(50) NOT NULL,
+  `keterangan` text NOT NULL,
+  `file_pendukung` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_tugas`
+--
+
+INSERT INTO `tb_tugas` (`id`, `mata_kuliah`, `dosen`, `jenis_tugas`, `nama_tugas`, `deadline`, `nama_file`, `pengumpulan`, `keterangan`, `file_pendukung`) VALUES
+(30, 'hbbh', '', 'hbbh', 'hbbh', '2021-05-23 12:42:00', 'hbbh', 'hbbh', 'hbbh', 0),
+(33, 'edea', '', 's', 'd', '0000-00-00 00:00:00', 'fdfdf', 'dfdfd', 'dfdfd', 0),
+(39, 'kkj', 'skdma', 'msfnk', 'nk', '2021-06-05 04:56:00', 'kjk', 'da', 'sdsa', 0);
 
 -- --------------------------------------------------------
 
@@ -135,7 +163,8 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (4, 3, 'Menu Management', 'menu', 'fas fa-fw fa-folder', 1),
 (5, 3, 'Sub Menu Management', 'menu/submenu', 'fas fa-fw fa-folder-open', 1),
 (6, 1, 'Role', 'admin/role', 'fas fa-fw fa-user-tie', 1),
-(8, 2, 'Change Password', 'user/changepassword', 'fas fa-fw fa-key', 1);
+(8, 2, 'Change Password', 'user/changepassword', 'fas fa-fw fa-key', 1),
+(16, 2, 'Jadwal Tugas', 'user/jadwal', 'fa fa-fw fa-book', 1);
 
 -- --------------------------------------------------------
 
@@ -160,6 +189,12 @@ INSERT INTO `user_token` (`id`, `email`, `token`, `date_created`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indeks untuk tabel `tb_tugas`
+--
+ALTER TABLE `tb_tugas`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `user`
@@ -202,6 +237,12 @@ ALTER TABLE `user_token`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `tb_tugas`
+--
+ALTER TABLE `tb_tugas`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
@@ -229,7 +270,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT untuk tabel `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_token`
